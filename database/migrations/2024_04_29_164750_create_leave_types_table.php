@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('leave_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->comment('leave type name');
+            $table->tinyInteger('status')->default(1)->comment('is this leave type is active or not?');
             $table->timestamps();
         });
     }

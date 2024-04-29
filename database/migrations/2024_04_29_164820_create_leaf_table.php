@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leaf', function (Blueprint $table) {
+        Schema::create('leaves', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('leave_type_id')->comment('foreign key of leave_types table');
+            $table->unsignedBigInteger('user_id')->comment('foreign key of users table');
+            $table->timestamp('start_date')->comment('leave start date');
+            $table->timestamp('end_date')->comment('leave end date');
+            $table->text('reason')->nullable()->comment('leave reason');
+            $table->string('admin_comment')->nullable()->comment('admin comment');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leaf');
+        Schema::dropIfExists('leaves');
     }
 };
